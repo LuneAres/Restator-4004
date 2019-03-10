@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="restator4004.css">
+		<link rel="stylesheet" href="font.css">
+		<script src="restator-data.js"></script>
+		<script src="restator4004.js"></script>
+		<title>Restator 4004</title>
+	</head>
+
+	<body onload='init()'>
+		<div id="wrapper">
+			<header>
+				<h1 id="titre">Restator 4004</h1>
+				<h2>Simulateur de poireau</h2>
+			</header>
+            
+			<!-- Poireau -->
+			<article id="leek">
+				<div class="bandeau">
+					<h3>Jean-Michel</h3>
+				</div>
+				<div id="level">
+					<div id=leekImage>
+						<img src="https://leekwars.com/image/leek/leek1_front_green.png" alt="image de poireau" ondblclick="color='multi';ula();">
+					</div>
+					<div id="leekInputLevel">
+						<span>
+							Niveau <input type="number" min="1" max="301" value="1" class="number" id="levelNumber" oninput="updateLevel()">
+						<input type="range"  min="1" max="301" value="1" class="slider" id="levelSlider" oninput="updateLevel()">
+						</span>
+					</div>
+				</div>
+
+				<div id="configLeek">
+					<div id="characteristics">
+						<table>
+							<!-- généré via restator.js -->
+						</table>
+						<div id="capital">
+							<p id="totalCapital"><span id="capitalValue">50</span>/<span id="capitalMaxValue">50</span></p>
+							<button class="lwButtons" id="resetCharacs" onclick="resetCharacs()">Remettre à zéro</button>
+						</div>
+					</div>
+				</div>
+			</article>
+			
+			<button class="lwButtons" id="hideEquipment" onclick="hideEquipment()">Masquer l'équipement</button>
+			<section id="equipment">
+				<div id="weapons" class="bigBackground">
+					<div class="subtitle">
+						<h3>Armes</h3>
+					</div>
+
+					<div class="sortDiv" name="sortweapon">
+						<button class="lwButtons" name="weaponSortlevel" onclick="sortItem('level','weapon')">Trier par niveau</button>
+						<button class="lwButtons" name="weaponSortrange" onclick="sortItem('range','weapon')" title="par portée maximale">Trier par portée</button>
+		    			</div>
+
+					<div class="itemsSelection">
+						<article class="divDrop">
+							<div class="bandeau">
+								<h3>Armes disponibles</h3>
+							</div>
+							<div id="weaponsAvaible"  ondrop="dropItem(event,'weapon')" ondragover="allowItemDrop(event,'weapon')"></div>
+						</article>
+
+						<article class="divDrop" id="equipWeapons">
+							<div class="bandeau">
+								<h3>
+								Armes équipées 
+								[<span id="weaponsNumber">0</span>/<span id="maxWeaponsNumber">2</span>]
+								</h3>
+							</div>
+							<div id="weaponsEquipped" ondrop="dropItem(event,'weapon')" ondragover="allowItemDrop(event,'weapon')"></div>
+							<div class="bandeau" inline>
+								<h3>Caractéristiques</h3>
+							</div>
+							<table id="weaponsInfo">
+								<!-- généré via restator.js -->
+							</table>
+						</article>
+					</div>
+					
+					<div class="sortDiv" name="sortweapon">
+						<button class="lwButtons" name="weaponSortlevel" onclick="sortItem('level','weapon')">Trier par niveau</button>
+						<button class="lwButtons" name="weaponSortrange" onclick="sortItem('range','weapon')" title="par portée maximale">Trier par portée</button>
+		    			</div>
+				</div>
+
+				<div id="chips" class="bigBackground">
+					<div class="subtitle">
+						<h3>Puces</h3>
+					</div>
+
+					<div class="sortDiv" name="sortchip">
+						<button class="lwButtons" name="chipSortlevel" onclick="sortItem('level','chip')">Trier par niveau</button>
+						<button class="lwButtons" name="chipSortrange" onclick="sortItem('range','chip')" title="par portée maximale">Trier par portée</button>
+						<button class="lwButtons" name="chipSorttype" onclick="sortItem('type','chip')">Trier par type</button>
+					</div>
+
+					<div class="itemsSelection">
+						<article class="divDrop">
+							<div class="bandeau">
+								<h3>Puces disponibles</h3>
+							</div>
+							<div id="chipsAvaible"  ondrop="dropItem(event,'chip')" ondragover="allowItemDrop(event,'chip')"></div>
+						</article>
+						<article class="divDrop" id="equipChips">
+							<div class="bandeau">
+								<h3>Puces équipées 
+								[<span id="chipsNumber">0</span>/<span id="maxChipsNumber">7</span>]
+								</h3>
+							</div>
+							
+							<div id="chipsEquipped" ondrop="dropItem(event,'chip')" ondragover="allowItemDrop(event,'chip')"></div>
+							<div class="bandeau" inline>
+								<h3>Caractéristiques</h3>
+							</div>
+								<!--généré via restator.js-->
+							<table id="chipsInfo">
+							</table>
+						</article>
+					</div>
+
+					<div class="sortDiv" name="sortchip">
+						<button class="lwButtons" name="chipSortlevel" onclick="sortItem('level','chip')">Trier par niveau</button>
+						<button class="lwButtons" name="chipSortrange" onclick="sortItem('range','chip')" title="par portée maximale">Trier par portée</button>
+						<button class="lwButtons" name="chipSorttype" onclick="sortItem('type','chip')">Trier par type</button>
+					</div>
+				</div>	
+			</section>
+			<button class="lwButtons" id="hideEquipmentToHide" onclick="hideEquipment()">Masquer l'équipement</button>
+					
+				<!-- Armes -->
+			
+					
+			<!-- Chips -->
+			
+				
+			<section id="legend">
+				<div class="subtitle">
+					<h3>Légende</h3>
+				</div>
+				<ul>
+					<li>LoS : indique si un item a besoin d'une ligne de vue dégagée pour opérer.</li>
+					<li>
+						cercle 1 : 
+						<table class="area">
+							<tr>
+								<td></td>
+								<td class="full"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="full"></td>
+								<td></td>
+							</tr>
+						</table>
+					</li>
+					<li>
+						cercle 2 :
+						<table class="area">
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="full"></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td class="full"></td>
+							       	<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="full"></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</li>
+					<li>
+						<span>cerlce 3 :</span>
+						<table class="area">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class="full"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td class="full"></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class="full"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</li>
+				</ul>
+			</section>
+		</div>
+
+		<div class="bigleeks">
+			<img src="https://leekwars.com/image/big_leek_1_white.png", id="bigleek1" />
+			<img src="https://leekwars.com/image/big_leek_2_white.png", id="bigleek2" />
+		</div>
+
+	</body>
+</html>
