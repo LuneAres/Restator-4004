@@ -1,0 +1,550 @@
+body {
+    margin: 0;
+    font-family: Roboto,sans-serif;
+    color: #eee;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color: #333;
+}
+
+article {
+	background: hsla(0,0%,94.1%,.95);
+	border-radius: 3px;
+	padding: 0px;
+	margin: 10px 0px;
+	height: auto;
+}
+
+article * {
+	color: black;
+}
+
+section {
+	width: 100%;
+}
+
+.bandeau h3:before {
+	content: "";
+	position: absolute;
+	right: -20px;
+	top: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 36px 0 0 20px;
+	border-color: transparent transparent transparent hsla(0,0%,58.8%,.5);
+}
+
+.bandeau h3 {
+	position: relative;
+	display: inline-block;
+	background: hsla(0,0%,58.8%,.5);
+	margin: 0px;
+	line-height: 36px;
+	padding: 0 12px;
+	justify-content: left;
+	font-size: 19px;
+	height: 36px;
+	border-top-left-radius: 3px;
+}
+
+.bandeau {
+	width: 100%;
+	height: 36px;
+	background: #2a2a2a;
+	border-radius: 3px 3px 0px 0px;
+}
+
+.bandeau[inline], .bandeau[inline] h3 {
+	border-radius: 0;
+}
+
+.bandeau * {
+	color: white;
+}
+
+.subtitle h3 {
+	position: relative;
+	display: inline-block;
+	margin: 10px 0;
+	line-height: 36px;
+	padding: 0 12px;
+	justify-content: left;
+	font-size: 19px;
+	height: 36px;
+	background: #559c18;
+}
+
+.subtitle h3:after {
+	content: "";
+	position: absolute;
+	right: -20px;
+	top: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 36px 0 0 20px;
+	border-color: transparent transparent transparent #559c18;
+}
+
+.subtitle h3:before {
+	content: "";
+	position: absolute;
+	left: -10px;
+	top: 5px;
+	width: 10px;
+	height: 36px;
+	background: #559c18;
+}
+
+#lifeValue {
+	color: red;
+}
+
+#strengthValue {
+	color: #833100;
+}
+
+#wisdomValue {
+	color: #5ebe00;
+}
+
+#agilityValue {
+	color: #0080f7;
+}
+
+#resistanceValue {
+	color: #ff4a01;
+}
+
+#frequencyValue {
+	color: #000;
+}
+
+#scienceValue {
+	color: #0000a2;
+}
+
+#magicValue {
+	color: #b800b6;
+}
+
+#tpValue {
+	color: #ff7f01;
+}
+
+#mpValue {
+	color: #00a900
+}
+
+.bigleeks {
+	z-index: -10;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100px;
+}
+
+#bigleek1 {
+	position: absolute;
+	z-index: -10;
+	left: 0px;
+	bottom: 50px;
+}
+
+#bigleek2 {
+	position: absolute;
+	z-index: -10;
+	right: 0px;
+	bottom: 50px;
+}
+
+#wrapper {
+    width: 80%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: rgba(80,80,80,.6);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+    font-size:4em;
+}
+
+header h2 {
+    margin-top: 0;
+    text-align: center;
+    font-style: italic;
+}
+
+#leek {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 80%;
+}
+
+
+#leek #level {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#leekImage {
+    margin: 0;
+    width: 161px;
+    height: 211px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#leekInputLevel {
+    text-align: center;
+    margin: 10px;
+}
+
+#leekInputLevel .number {
+    /*-webkit-appearance: none;*/
+    width: 3em;
+    /*outline: none;*/
+}
+
+.slider {
+    margin-top:1em;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 1;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #5fad1b;
+    cursor: pointer;
+}
+
+
+table {
+    border-collapse: collapse;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#characteristics {
+    padding-top: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#totalCapital {
+	display: inline-block;
+	font-size: 19px;
+	height: 36px;
+}
+
+#characteristics img {
+    height: 1.5em;
+}
+
+#characteristics p {
+    width: 6em;
+    height: 1em;
+    margin: auto;
+}
+
+.tdValue {
+	font-size: 19px;
+	vertical-align: top;
+	margin-top: 2px;
+	font-weight: 500;
+}
+
+#characteristics table button {
+    border: none;
+    width: 20px;
+    height: 27px;
+    cursor: pointer;
+    opacity: .5;
+}
+
+#characteristics .more100 {
+	width: 30px;
+	background-image: url("https://leekwars.com/image/add100.png");
+}
+
+#characteristics .more10 {
+	width: 25px;
+	background-image: url("https://leekwars.com/image/add100.png");
+}
+
+#characteristics .more1 {
+	background-image: url("https://leekwars.com/image/add.png");
+}
+
+#characteristics .less100 {
+	width: 30px;
+	background-image: url(images/remove100.png);
+}
+
+#characteristics .less10 {
+	width: 25px;
+	background-image: url(images/remove10.png);
+}
+
+#characteristics .less1 {
+	background-image: url(images/remove.png);
+}
+
+#characteristics table button:disabled {
+    opacity: .2;
+    cursor: not-allowed;
+}
+
+#characteristics span[id$="Capital"] {
+    display: inline-block;
+    margin-left:  0.2em;
+    margin-right: 0.2em;
+}
+
+#characteristics .tdCapital {
+    width: 4em;
+    text-align: center;
+}
+
+@keyframes flash {
+    50% {
+        background-color: white;
+        opacity: 0;
+        color: #111;
+    }
+}
+
+
+.itemsSelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.divDrop {
+    width: 45%;
+    min-width: 160px;
+    height: 100%;
+}
+
+
+#weaponsAvaible, #weaponsEquipped, #chipsAvaible, #chipsEquipped {
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#equipWeapons, #equipChips {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 15px;
+}
+
+.weaponImg {
+    width: auto;
+    min-width: 150px;
+    height: 52px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+}
+
+.weaponImg img {
+    max-width: 150px;
+    max-height: 52px;
+}
+
+.chipImg {
+    width: 80px;
+    height: 80px;
+    margin: 3px;
+}
+
+.chipImg img {
+    max-width: 80px;
+    max-height: 80px;
+}
+
+
+.sortDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.itemsNumber {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.itemsNumber p {
+    margin-left: 2em;
+}
+
+.lwButtons {
+    margin: 1em;
+    background: #5fad1b;
+    border: none;
+    border-bottom: 3px solid #468014;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 17px;
+    display: inline-flex;
+    justify-content: center;
+    -webkit-box-align: center;
+    -moz-user-select: none;
+    padding: 6px 10px;
+}
+
+.lwButtons:active {
+	border: none;
+}
+
+.lwButtons:hover {
+    background-image: linear-gradient(180deg,rgba(110,201,31,.7) 0,rgba(110,201,31,.9) 50%,rgba(110,201,31,.7));
+}
+
+#hideEquipment, #hideEquipmentToHide {
+    width: 75%;
+    max-width: 750px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+
+.info td, .info th {
+    border: 1px solid black;
+    padding: 0.1em 1em;
+}
+
+#weaponImg {
+    width: 5em;
+    border: none;
+}
+
+.littleItem {
+    display: inline-block;
+    height: 100%;
+}
+
+.littleItemImg {
+    margin: 2px;
+    max-height: 2em;
+    vertical-align: middle;
+}
+
+.littleTP {
+	height: 1em;
+}
+
+#weaponsInfo .littleImg {
+    width: 5em;
+}
+
+#weaponsInfo .littleItemImg {
+    max-width: 5em;
+}
+
+#chipImg {
+    border: none;
+    width: 2em;
+}
+
+
+
+
+.effects, .effect {
+    display: flex;
+    flex-direction: column;
+}
+
+.effect {
+    margin-left: .7em;
+    margin-right: .7em;
+}
+
+.effect p {
+    margin: auto;
+}
+
+.effect div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0.4em;
+}
+
+
+#legend table {
+    margin: 0.5em auto;
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+
+#legend table tr {
+    background: #eee;
+}
+
+#legend table td {
+    width: 6px;
+    height: 6px;
+}
+
+.full {
+    background: #999;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#weaponsInfo, #weaponsInfo table, #weaponsInfo tr, #weaponsInfo td, #chipsInfo, #chipsInfo table, #chipsInfo tr, #chipsInfo td {
+	width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.weaponImg[actif] {
+	background: #fff;
+}
