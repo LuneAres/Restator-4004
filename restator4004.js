@@ -113,8 +113,6 @@ function init()
     sortChipsZone("chipsAvaible",chipsSort);
 
     updateLevel();
-
-    setArea(3, 0, true);
 }
 
 
@@ -478,10 +476,6 @@ function moveItem(event,type)
         {
             addWeapon(id);
         }
-        else
-        {
-            removeChip(id,'weapon');
-        }
     }
     else
     {
@@ -492,13 +486,11 @@ function moveItem(event,type)
         {
             addChip(id);
         }
-        else
-        {
-            removeChip(id,'chip');
-        }
     }
     
     document.getElementById(type+"sNumber").textContent = getItemsInZone(type+"sEquipped").length;
+    sortWeaponsZone(destination.id,weaponsSort);
+    sortChipsZone(destination.id,chipsSort);
 }
 
 
@@ -701,18 +693,25 @@ function addWeapon(id)
     
     let row = table.insertRow(-1);
     row.id = id;
-
-    row.insertCell(-1).innerHTML = "<div class=\"weaponImg\"><img src=\"" + getWeaponPng(id) + "\" alt=\"" + weapons[id].nameFr + "\"></div>";
-    row.insertCell(-1).textContent = weapons[id].nameFr;
+    
+    let cell = row.insertCell(-1);
+    cell.className = "itemName";
+    cell.innerHTML = "<h4>" + weapons[id].nameFr + "</h4><p>Niveau " + weapons[id].level + "</p>";
+    
+    row.insertCell(-1).innerHTML = "<p class=\"constItem\">" + getConstItem(id,'weapon') + "</p>";
+    row.insertCell(-1).innerHTML = "<div class=\"weaponInfoImg\"><img src=\"" + getWeaponPng(id) + "\" alt=\"" + weapons[id].nameFr + "\"></div>";
+    
+    cell = row.insertCell(-1);
+    cell.className = "itemRange";
+    cell.innerHTML = "<table class=\"area\" id=\"weaponTableRange\"></table>" + getTypeOfArea(weapons[id]) + ((weapons[id].los)? "":"<br /><b>[à travers les obstacles]</b>");
+    setArea(weapons[id].max_range, weapons[id].min_range, weapons[id].launch_type, "weaponTableRange");
+    
     row.insertCell(-1).innerHTML = "<img class='littleTP' src='https://leekwars.com/image/charac/tp.png' /> " + weapons[id].cost;
-    row.insertCell(-1).textContent = getTypeOfArea(weapons[id]);
     row.insertCell(-1).textContent = getTypeOfZone(weapons[id].area);
-    row.insertCell(-1).textContent = (weapons[id].los)? "oui":"non";
-    row.insertCell(-1).textContent = getConstItem(id,'weapon');
     
     // effects
     let effects = row.insertCell(-1);
-    effects.innerHTML = updateEffects(weapons[id].effects)
+    effects.innerHTML = updateEffects(weapons[id].effects);
 }
 
 
@@ -724,21 +723,30 @@ function addChip(id)
 {
     let table = document.getElementById("chipsInfo");
     table.innerHTML = "";
+    let weaponDiv = document.getElementById(chips[id].name + "Img");
+    weaponDiv.actif = "true";
     
     let row = table.insertRow(-1);
     row.id = id;
-
-    row.insertCell(-1).innerHTML = "<img src=\"" + getChipPng(id) + "\" alt=\"" + chips[id].nameFr + "\">";
-    row.insertCell(-1).textContent = chips[id].nameFr;
+    
+    let cell = row.insertCell(-1);
+    cell.className = "itemName";
+    cell.innerHTML = "<h4>" + chips[id].nameFr + "</h4><p>Niveau " + chips[id].level + "</p>";
+    
+    row.insertCell(-1).innerHTML = "<p class=\"constItem\">" + getConstItem(id,'chip') + "</p>";
+    row.insertCell(-1).innerHTML = "<div class=\"chipInfoImg\"><img src=\"" + getChipPng(id) + "\" alt=\"" + chips[id].nameFr + "\"></div>";
+    
+    cell = row.insertCell(-1);
+    cell.className = "itemRange";
+    cell.innerHTML = "<table class=\"area\" id=\"chipTableRange\"></table>" + getTypeOfArea(chips[id]) + ((chips[id].los)? "":"<br /><b>[à travers les obstacles]</b>");
+    setArea(chips[id].max_range, chips[id].min_range, chips[id].launch_type, "chipTableRange");
+    
     row.insertCell(-1).innerHTML = "<img class='littleTP' src='https://leekwars.com/image/charac/tp.png' /> " + chips[id].cost;
-    row.insertCell(-1).textContent = getTypeOfArea(chips[id]);
     row.insertCell(-1).textContent = getTypeOfZone(chips[id].area);
-    row.insertCell(-1).textContent = (chips[id].los)? "oui":"non";
-    row.insertCell(-1).textContent = getConstItem(id,'chip');
     
     // effects
     let effects = row.insertCell(-1);
-    effects.innerHTML = updateEffects(chips[id].effects)
+    effects.innerHTML = updateEffects(chips[id].effects);
 }
 
 
@@ -850,15 +858,11 @@ function updateEffects(effects)
 function updateWeapons()
 {
     let table = document.getElementById("weaponsInfo");
-    let rows = table.getElementsByTagName("tr");
-    rows = Array.prototype.slice.call(rows, 0);
-
-    for (let r in rows)
-    {
-        // dernière cellule :
-        let i = rows[r].cells.length - 1
-        rows[r].cells[i].innerHTML = updateEffects(weapons[rows[r].id].effects)
-    }
+    let infos = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[0];
+    
+    if (infos){
+        let i = infos.cells.length - 1
+        infos.cells[i].innerHTML = updateEffects(weapons[infos.id].effects)}
 }
 
 
@@ -868,26 +872,15 @@ function updateWeapons()
 function updateChips()
 {
     let table = document.getElementById("chipsInfo");
-    let rows = table.getElementsByTagName("tr");
-    rows = Array.prototype.slice.call(rows, 0);
-
-    for (let r in rows)
-    {
-        // on passe la première ligne
-        if (r == 0)
-        {
-            continue;
-        }
-
-        // dernière cellule :
-        let i = rows[r].cells.length - 1
-        rows[r].cells[i].innerHTML = updateEffects(chips[rows[r].id].effects)
-    }
+    let infos = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[0];
+    
+    if (infos){
+        let i = infos.cells.length - 1
+        infos.cells[i].innerHTML = updateEffects(chips[infos.id].effects)}
 }
 
 
 /*------------------------------------- Fonctions annexes -------------------------------------*/
-
 
 /*
  * Pour un caractère et une variation pour ce caractère, renvoie le nombre de capital à dépenser,
@@ -1102,23 +1095,19 @@ function getItemLimit(lvl,type)
 /*
  * Masque le choix de l'équipement.
  */
-function hideEquipment()
+function hide(toHide, button)
 {
-    let equipment = document.getElementById("equipment");
-    let button    = document.getElementById("hideEquipment");
-    let buttonToHide = document.getElementById("hideEquipmentToHide");
+    toHide = document.getElementById(toHide);
 
-    if (equipment.style.display == "")
+    if (toHide.style.display == "")
     {
-        equipment.style.display = "none";
-        buttonToHide.style.display = "none";
-        button.textContent = "Afficher l'équipement";
+        toHide.style.display = "none";
+        button.textContent = "Afficher";
     }
     else
     {
-        equipment.style.display = "";
-        buttonToHide.style.display = "";
-        button.textContent = "Masquer l'équipement";
+        toHide.style.display = "";
+        button.textContent = "Masquer";
     }
 }
 
@@ -1159,17 +1148,17 @@ function getCharacCoef(c)
  */
 function getTypeOfArea(item)
 {
-    let area = item.min_range;
+    let area = "Portée : " + item.min_range;
 
     if (item.min_range != item.max_range)
     {
-        area += " - " + item.max_range;
+        area += " à " + item.max_range;
     }
 
 
     if (item.launch_type == 0)
     {
-        area += ", en ligne uniquement";
+        area += " en ligne";
     }
 
     return area;
@@ -1187,26 +1176,19 @@ function getTypeOfZone(area)
 
 
 /*----------------------------------------------------------------------------------------------*/
-function setArea(max, min, notLine){
-	let test = document.getElementById("test");
-	let cells = [];
-	
+function setArea(max, min, notLine, id){
+	let table = document.getElementById(id);
+
 	for (let i = 0; i < max*2+1; i++){
-		cells.i = []
+		let row = table.insertRow(-1);
 		
 		for (let j = 0; j < max*2+1; j++) {
+			let cell = row.insertCell(-1);
+			
 			let x = i - max;
 			let y = j - max;
 			
-			if (Math.abs(x) + Math.abs(y) <= max && Math.abs(x) + Math.abs(y) >= min && (notLine || (x === 0 || y === 0))){let result = "full";}
-			else {let result = "";}
-			
-			cells[i][j] = result;}
-	}
-	
-	for (let x = 0; x < cells.lenght; x++){
-		let line = test.insertRow(-1);
-		for (let y = 0; y < cells[x].lenght; y++){
-			line.insertCell(-1).innerHTML = "<th class=\"" + cells[x][y] + "\"></th>";}
+			if (Math.abs(x) + Math.abs(y) <= max && Math.abs(x) + Math.abs(y) >= min && (notLine || (x === 0 || y === 0))){cell.className = "full";}
+		}
 	}
 }

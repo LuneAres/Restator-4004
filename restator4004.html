@@ -45,14 +45,14 @@
 					</div>
 				</div>
 			</article>
-			
-			<button class="lwButtons" id="hideEquipment" onclick="hideEquipment()">Masquer l'équipement</button>
-			<section id="equipment">
-				<div id="weapons" class="bigBackground">
-					<div class="subtitle">
-						<h3>Armes</h3>
-					</div>
 
+			<section id="equipment">
+
+				<div class="subtitle">
+					<h2>Armes</h2>
+					<button onclick="hide('weapons', this)">Masquer</button>
+				</div>
+				<div id="weapons">
 					<div class="sortDiv" name="sortweapon">
 						<button class="lwButtons" name="weaponSortlevel" onclick="sortItem('level','weapon')">Trier par niveau</button>
 						<button class="lwButtons" name="weaponSortrange" onclick="sortItem('range','weapon')" title="par portée maximale">Trier par portée</button>
@@ -78,7 +78,9 @@
 								<h3>Caractéristiques</h3>
 							</div>
 							<table id="weaponsInfo">
-								<!-- généré via restator.js -->
+								<tbody>
+									<!-- généré via restator.js -->
+								</tbody>
 							</table>
 						</article>
 					</div>
@@ -89,11 +91,11 @@
 		    			</div>
 				</div>
 
-				<div id="chips" class="bigBackground">
-					<div class="subtitle">
-						<h3>Puces</h3>
-					</div>
-
+				<div class="subtitle">
+					<h2>Puces</h2>
+					<button onclick="hide('chips', this)">Masquer</button>
+				</div>
+				<div id="chips">
 					<div class="sortDiv" name="sortchip">
 						<button class="lwButtons" name="chipSortlevel" onclick="sortItem('level','chip')">Trier par niveau</button>
 						<button class="lwButtons" name="chipSortrange" onclick="sortItem('range','chip')" title="par portée maximale">Trier par portée</button>
@@ -118,8 +120,10 @@
 							<div class="bandeau" inline>
 								<h3>Caractéristiques</h3>
 							</div>
-								<!--généré via restator.js-->
 							<table id="chipsInfo">
+								<tbody>
+									<!--généré via restator.js-->
+								</tbody>
 							</table>
 						</article>
 					</div>
@@ -130,150 +134,6 @@
 						<button class="lwButtons" name="chipSorttype" onclick="sortItem('type','chip')">Trier par type</button>
 					</div>
 				</div>	
-			</section>
-			<button class="lwButtons" id="hideEquipmentToHide" onclick="hideEquipment()">Masquer l'équipement</button>
-					
-				<!-- Armes -->
-			
-					
-			<!-- Chips -->
-			
-				
-			<section id="legend">
-				<div class="subtitle">
-					<h3>Légende</h3>
-				</div>
-				<ul>
-					<li>LoS : indique si un item a besoin d'une ligne de vue dégagée pour opérer.</li>
-					<li>
-						cercle 1 : 
-						<table class="area">
-							<tr>
-								<td></td>
-								<td class="full"></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td class="full"></td>
-								<td></td>
-							</tr>
-						</table>
-					</li>
-					<li>
-						cercle 2 :
-						<table class="area">
-							<tr>
-								<td></td>
-								<td></td>
-								<td class="full"></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td class="full"></td>
-							       	<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td class="full"></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
-					</li>
-					<li>
-						<span>cerlce 3 :</span>
-						<table class="area">
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td class="full"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td class="full"></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td class="full"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
-					</li>
-				</ul>
 			</section>
 		</div>
 

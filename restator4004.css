@@ -25,7 +25,7 @@ section {
 	width: 100%;
 }
 
-.bandeau h3:before {
+.bandeau h3:after {
 	content: "";
 	position: absolute;
 	right: -20px;
@@ -65,10 +65,14 @@ section {
 	color: white;
 }
 
-.subtitle h3 {
+.subtitle {
+	margin: 15px 0;
+}
+
+.subtitle h2 {
 	position: relative;
 	display: inline-block;
-	margin: 10px 0;
+	margin: 0;
 	line-height: 36px;
 	padding: 0 12px;
 	justify-content: left;
@@ -77,7 +81,7 @@ section {
 	background: #559c18;
 }
 
-.subtitle h3:after {
+.subtitle h2:after {
 	content: "";
 	position: absolute;
 	right: -20px;
@@ -89,7 +93,7 @@ section {
 	border-color: transparent transparent transparent #559c18;
 }
 
-.subtitle h3:before {
+.subtitle h2:before {
 	content: "";
 	position: absolute;
 	left: -10px;
@@ -98,6 +102,58 @@ section {
 	height: 36px;
 	background: #559c18;
 }
+
+.subtitle button {
+	color: white;
+	position: relative;
+	display: inline-block;
+	background: hsla(0,0%,58.8%,.2);
+	margin-left: 25px;
+	line-height: 36px;
+	padding: 0 12px;
+	justify-content: center;
+	font-size: 19px;
+	height: 36px;
+	border: none;
+	cursor: pointer;
+}
+
+.subtitle button:after {
+	content: "";
+	position: absolute;
+	right: -20px;
+	top: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 36px 0 0 20px;
+	border-color: transparent transparent transparent hsla(0,0%,58.8%,.2);
+}
+
+.subtitle button:before {
+	content: "";
+	position: absolute;
+	left: -20px;
+	top: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 36px 0 0 20px;
+	border-color:  hsla(0,0%,58.8%,.2) transparent transparent transparent;
+}
+
+.subtitle button:hover {
+	background: hsla(0,0%,78.4%,.4);
+}
+
+.subtitle button:hover:after {
+	border-color: transparent transparent transparent hsla(0,0%,78.4%,.4);
+}
+
+.subtitle button:hover:before {
+	border-color: hsla(0,0%,78.4%,.4) transparent transparent transparent;
+}
+
 
 #lifeValue {
 	color: red;
@@ -246,6 +302,7 @@ table {
     border-collapse: collapse;
     vertical-align: middle;
     text-align: center;
+    border-color: grey;
 }
 
 #characteristics {
@@ -318,7 +375,7 @@ table {
 
 #characteristics table button:disabled {
     opacity: .2;
-    cursor: not-allowed;
+    cursor: default;
 }
 
 #characteristics span[id$="Capital"] {
@@ -486,9 +543,6 @@ table {
     width: 2em;
 }
 
-
-
-
 .effects, .effect {
     display: flex;
     flex-direction: column;
@@ -510,21 +564,54 @@ table {
     margin-left: 0.4em;
 }
 
+#weaponsInfo, #weaponsInfo tr, #weaponsInfo td, #chipsInfo, #chipsInfo tr, #chipsInfo td {
+	width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
 
-#legend table {
+#weaponTableRange {
     margin: 0.5em auto;
     border-collapse: separate;
     border-spacing: 1px;
+    display: table;
 }
 
-#legend table tr {
+#weaponTableRange tr {
     background: #eee;
+    border-collapse: separate;
+    border-bottom: 1px solid white;
 }
 
-#legend table td {
+#weaponTableRange td {
     width: 6px;
     height: 6px;
+    border-collapse: separate;
+    border-right: 1px solid white;
 }
+
+#chipTableRange {
+    margin: 0.5em auto;
+    border-collapse: separate;
+    border-spacing: 1px;
+    display: table;
+}
+
+#chipTableRange tr {
+    background: #eee;
+    border-collapse: separate;
+    border-bottom: 1px solid white;
+}
+
+#chipTableRange td {
+    width: 6px;
+    height: 6px;
+    border-collapse: separate;
+    border-right: 1px solid white;
+}
+
 
 .full {
     background: #999;
@@ -537,14 +624,52 @@ li {
     align-items: center;
 }
 
-#weaponsInfo, #weaponsInfo table, #weaponsInfo tr, #weaponsInfo td, #chipsInfo, #chipsInfo table, #chipsInfo tr, #chipsInfo td {
-	width: 100%;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-}
-
 .weaponImg[actif] {
 	background: #fff;
+}
+
+.weaponInfoImg {
+	height: 90px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.itemName {
+	height: 25px;
+	background: #ddd;
+	padding: 2px 5px;
+	display: block;
+	text-align: center;
+}
+
+.itemName h4 {
+	margin: 0;
+	width: 50%;
+	text-align: left;
+	font-size: 19px;
+	font-weight: 400;
+}
+
+.itemName p {
+	margin: 0;
+	width: 50%;
+	text-align: right;
+	margin: 4px 0 0 0;
+	color: #777;
+	font-size: 16px;
+}
+
+.constItem {
+	width: 100%;
+	text-align: left;
+	color: #555;
+	font-size: 13px;
+	padding: 4px;
+	margin: 0;
+}
+
+.itemRange {
+	background: #fff;
+	flex-direction: column;
 }
