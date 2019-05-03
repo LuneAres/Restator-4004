@@ -71,7 +71,7 @@ function init()
         table.insertAdjacentHTML("beforeend",`
         <tr>
             <td><img src="https://leekwars.com/image/charac/` + c + `.png"></td>
-            <td class="tdValue"><span   id="` + c + `Value">` + getMinCharac(c) + `</span></td>
+            <td class="tdValue"><span color="` + c + `" id="` + c + `Value">` + getMinCharac(c) + `</span></td>
             <td><button class="less100" id="` + c + `Less100" onclick='updateCharac("` + c + `", -100)' /></td>
             <td><button class="less10" id="` + c + `Less10"  onclick='updateCharac("` + c + `", -10)' /></button></td>
             <td><button class="less1" id="` + c + `Less1"   onclick='updateCharac("` + c + `", -1)' /></button></td>
@@ -744,6 +744,8 @@ function addChip(id)
     row.insertCell(-1).innerHTML = "<img class='littleTP' src='https://leekwars.com/image/charac/tp.png' /> " + chips[id].cost;
     row.insertCell(-1).textContent = getTypeOfZone(chips[id].area);
     
+    row.insertCell(-1).textContent = "récupération : " + chips[id].cooldown;
+    
     // effects
     let effects = row.insertCell(-1);
     effects.innerHTML = updateEffects(chips[id].effects);
@@ -779,70 +781,51 @@ function removeItem(id,type)
  */
 function updateEffects(effects)
 {
-    let effectsList = {1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]};
+    let effectsList = [];
     let characLinked = {1:"strength",2:"wisdom",3:"science",4:"resistance",6:"agility",7:"magic",9:"magic"}
 
     for (let e in effects)
     {
         let type = effects[e].type;
-
         if (type != 0 && type != 5 && type != 8)
         {
-            let coef = getCharacCoef(characLinked[type])
-            let txt = Math.round(effects[e].value1 * coef);
+            let coef = getCharacCoef(characLinked[type]);
+            let min = Math.round(effects[e].value1 * coef);
+            let max = Math.round((effects[e].value1 + effects[e].value2) * coef)
+            let txt = min
 
-            if (effects[e].value2 != 0)
-                txt += ' - ' + Math.round((effects[e].value1 + effects[e].value2) * coef);
+            if (min != max)
+                txt += ' - ' + max;
 
-            if (type != 9)
-                effectsList[type].push([txt,effects[e].turns]);
+            if (type != 9 && type != 3)
+                effectsList.push([txt,effects[e].turns,type]);
             else
-                effectsList[type].push([txt,effects[e].turns,effects[e].id]);
+                effectsList.push([txt,effects[e].turns,type,effects[e].id]);
 
         }
     }
-
 
     let html = "";
 
     for (let e in effectsList)
     {
-        if (effectsList[e].length == 0)
-            continue;
+        let effect = "<b color=\"" + characLinked[effectsList[e][2]] + "\" class=\"effect\">" + typeEffect[effectsList[e][2]] + " : ";
+        effect += effectsList[e][0];
+        // debuff
+        if (effectsList[e][2] == 9 || effectsList[e][2] == 3)
+        {
+            effect += ' ' + {3: "force", 4: "agilité", 7: "mp", 8: "pt", 17: "mp", 18: "tp", 19: "force", 21: "résistance", 22: "sagesse", 24: "magie"}[effectsList[e][3]];
+        }
+
+        if (effectsList[e][1] > 0)
+            effect += " (" + effectsList[e][1] + " tours)";
         
-        let effect = "<span class=\"effect\">" + typeEffect[e] + " : ";
-        let sameDuration = true;
-
-
-        for (let v in effectsList[e])
+        effect += "</b>";
+        
+        if (e < effectsList.length - 1)
         {
-            if (effectsList[e][v][1] != effectsList[e][0][1])
-            {
-                sameDuration = false;
-                break;
-            }
+            effect+="<br />";
         }
-
-        for (let v in effectsList[e])
-        {
-            effect += effectsList[e][v][0];
-
-            console.log("I'm here with v :",v)
-            // debuff
-            if (e == 9)
-            {
-                console.log("hey there")
-                effect += ' ' + {17: "mp", 18: "tp", 19: "force", 24: "magie"}[effectsList[e][v][2]];
-            }
-
-            if (!sameDuration && effectsList[e][v][1] > 0)
-                effect += " (" + effectsList[e][v][1] + " tours)";
-        }
-
-        if (sameDuration && effectsList[e][0][1] > 0)
-            effect += " (" + effectsList[e][0][1] + " tours)";
-
-        effect += "</span>";
         
         html += effect;
     }
@@ -1110,18 +1093,6 @@ function hide(toHide, button)
         button.textContent = "Masquer";
     }
 }
-
-
-
-/*
- * Renvoie si l'equipement est caché ou non.
- */
-function isEquipmentHidden()
-{
-    return document.getElementById("equipment").style.display == "none";
-}
-
-
 
 /*
  * Renvoie le nom de la constante associée à l'item.

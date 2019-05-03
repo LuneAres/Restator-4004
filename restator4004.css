@@ -155,43 +155,43 @@ section {
 }
 
 
-#lifeValue {
+[color="life"] {
 	color: red;
 }
 
-#strengthValue {
+[color="strength"] {
 	color: #833100;
 }
 
-#wisdomValue {
+[color="wisdom"] {
 	color: #5ebe00;
 }
 
-#agilityValue {
+[color="agility"] {
 	color: #0080f7;
 }
 
-#resistanceValue {
+[color="resistance"] {
 	color: #ff4a01;
 }
 
-#frequencyValue {
+[color="frequency"] {
 	color: #000;
 }
 
-#scienceValue {
+[color="science"] {
 	color: #0000a2;
 }
 
-#magicValue {
+[color="magic"] {
 	color: #b800b6;
 }
 
-#tpValue {
+[color="tp"] {
 	color: #ff7f01;
 }
 
-#mpValue {
+[color="mp"] {
 	color: #00a900
 }
 
@@ -361,16 +361,16 @@ table {
 
 #characteristics .less100 {
 	width: 30px;
-	background-image: url(images/remove100.png);
+	background-image: url(remove100.png);
 }
 
 #characteristics .less10 {
 	width: 25px;
-	background-image: url(images/remove10.png);
+	background-image: url(remove10.png);
 }
 
 #characteristics .less1 {
-	background-image: url(images/remove.png);
+	background-image: url(remove.png);
 }
 
 #characteristics table button:disabled {
@@ -406,7 +406,7 @@ table {
 }
 
 .divDrop {
-    width: 45%;
+    width: 49%;
     min-width: 160px;
     height: 100%;
 }
@@ -606,8 +606,8 @@ table {
 }
 
 #chipTableRange td {
-    width: 6px;
-    height: 6px;
+    width: 2px;
+    height: 2px;
     border-collapse: separate;
     border-right: 1px solid white;
 }
